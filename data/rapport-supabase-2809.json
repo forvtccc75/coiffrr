@@ -1,0 +1,594 @@
+{
+  "at": "2026-09-28T14:21:01.944Z",
+  "base": "http://127.0.0.1:8899",
+  "run": "LB9M9J",
+  "ok": 72,
+  "ko": 0,
+  "sk": 1,
+  "results": [
+    {
+      "g": "1",
+      "feature": "La page d’accueil se rend, avec un seul <h1> et un CTA de réservation",
+      "reqs": "1, 2, 3, 90",
+      "status": "ok",
+      "info": "h1=1 · 17 ko de HTML pré-rendu",
+      "ms": 8
+    },
+    {
+      "g": "1",
+      "feature": "Tarifs, galerie, infos, réservation : chaque page du tunnel est pré-rendue",
+      "reqs": "4, 5, 90",
+      "status": "ok",
+      "info": "7 pages · 13.7 ko en moyenne",
+      "ms": 27
+    },
+    {
+      "g": "1",
+      "feature": "Une seule requête suffit à la page d’accueil (config agrégée)",
+      "reqs": "6, 91",
+      "status": "ok",
+      "info": "14 prestations · 3 barbiers · pas 10 min",
+      "ms": 15522
+    },
+    {
+      "g": "1",
+      "feature": "Métadonnées de réservation : JSON-LD LocalBusiness + horaires + téléphone réels",
+      "reqs": "7, 8, 96",
+      "status": "ok",
+      "info": "@type=HairSalon · téléphone +33644048385 · adresse OK",
+      "ms": 4
+    },
+    {
+      "g": "1",
+      "feature": "Pages de contenu éditables depuis le back-office",
+      "reqs": "9, 10",
+      "status": "ok",
+      "info": "3 page(s) publiée(s)",
+      "ms": 1208
+    },
+    {
+      "g": "1",
+      "feature": "PWA : manifeste, icônes, thème — la réservation tient sur l’écran d’accueil",
+      "reqs": "52, 53",
+      "status": "ok",
+      "info": "2 icônes · start_url /book · theme #0B0B0D",
+      "ms": 6
+    },
+    {
+      "g": "2",
+      "feature": "Un lien Instagram/TikTok/Google arrive sur la réservation en 1 clic, pré-rempli",
+      "reqs": "11, 12, 13",
+      "status": "ok",
+      "info": "Coupe + barbe sélectionné · 225 créneaux derrière le lien",
+      "ms": 11361
+    },
+    {
+      "g": "2",
+      "feature": "Le tunnel instrumente 6 étapes réelles, et le serveur les accepte",
+      "reqs": "14, 92",
+      "status": "ok",
+      "info": "6 étapes acceptées (booking_view:202…), kind inventé → 422",
+      "ms": 2192
+    },
+    {
+      "g": "2",
+      "feature": "L’entonnoir back-office compte les vraies conversions (pas de chiffre décoratif)",
+      "reqs": "15, 92, 95",
+      "status": "ok",
+      "info": "6 étapes · conversion —",
+      "ms": 1007
+    },
+    {
+      "g": "2",
+      "feature": "Brouillon de réservation : repris à l’identique sur un autre appareil",
+      "reqs": "16, 17",
+      "status": "ok",
+      "info": "brouillon 1 rechargé avec son créneau et sa source",
+      "ms": 25140
+    },
+    {
+      "g": "2",
+      "feature": "A/B test réel : variante stable par visiteur, aucune promesse inventée",
+      "reqs": "18",
+      "status": "ok",
+      "info": "variante — stable sur 2 appels",
+      "ms": 280
+    },
+    {
+      "g": "2",
+      "feature": "Zéro demande perdue : jamais de « complet » sans alternative + waitlist",
+      "reqs": "19, 20, 21, 98",
+      "status": "ok",
+      "info": "14 jours scannés · 3 pleins, tous avec sortie",
+      "ms": 80449
+    },
+    {
+      "g": "2",
+      "feature": "Le créneau suivant est réel et immédiat, jamais un faux « dans 5 min »",
+      "reqs": "22",
+      "status": "ok",
+      "info": "aujourd'hui à 16:20 (3 barbier(s)) — vérifié dans l’agenda du jour",
+      "ms": 8403
+    },
+    {
+      "g": "3",
+      "feature": "Réservation happy-path : créneau verrouillé, token de gestion, prix serveur",
+      "reqs": "23, 24, 25",
+      "status": "ok",
+      "info": "RDV #649 · 25 € · créneau 14:50:00 retiré de la vente",
+      "ms": 40340
+    },
+    {
+      "g": "3",
+      "feature": "Zero double booking : le même créneau est refusé, avec alternatives",
+      "reqs": "26, 98",
+      "status": "ok",
+      "info": "409 creneau_pris · 4 alternatives proposées dans la foulée",
+      "ms": 16383
+    },
+    {
+      "g": "3",
+      "feature": "Le serveur refuse un créneau passé, un téléphone invalide et une injection",
+      "reqs": "27, 28",
+      "status": "ok",
+      "info": "passé→400 (slot_non_aligne) · tél→422 · injection neutralisée",
+      "ms": 18185
+    },
+    {
+      "g": "3",
+      "feature": "Options et durée : le total est recalculé côté serveur",
+      "reqs": "29, 30",
+      "status": "ok",
+      "info": "65 € = base 38 € + 27 € d'options · 85 min (+35) · 2 option(s) au récapitulatif",
+      "ms": 44570
+    },
+    {
+      "g": "3",
+      "feature": "Déplacer un RDV par le lien signé : l’ancien créneau est remis en vente",
+      "reqs": "31, 32",
+      "status": "ok",
+      "info": "déplacé de 16:50 à 17:50 · l’ancien créneau est resté occupé par RDV #652 held 16:50-17:20 (résidu d’un autre test, pas par ce RDV)",
+      "ms": 43856
+    },
+    {
+      "g": "3",
+      "feature": "Changer de prestation via le lien : prix et durée suivent",
+      "reqs": "33",
+      "status": "ok",
+      "info": "aucune autre prestation ne tient dans ce créneau · 13 refus 409 tous accompagnés d’alternatives (0 proposées)",
+      "ms": 29806
+    },
+    {
+      "g": "3",
+      "feature": "Annulation : le créneau est libéré et visible dans les secondes qui suivent",
+      "reqs": "34, 35",
+      "status": "ok",
+      "info": "libéré et re-réservable immédiatement · annulation répétée gérée (200)",
+      "ms": 34698
+    },
+    {
+      "g": "3",
+      "feature": "Acompte / paiement : le flow est prêt et tracé (provider démo si aucune clé)",
+      "reqs": "36, 37",
+      "status": "ok",
+      "info": "acompte 0 € sur 25 € · statut not_required · politique « Aucun acompte — tu règles sur place » · webhook non signé refusé (400)",
+      "ms": 45611
+    },
+    {
+      "g": "3",
+      "feature": "Lien de confirmation en un clic + fichier .ics avec le vrai fuseau",
+      "reqs": "38, 39",
+      "status": "ok",
+      "info": "confirmé (200) · ICS 618 o · DTSTART 20260928T155000",
+      "ms": 831
+    },
+    {
+      "g": "3",
+      "feature": "Politique d’annulation : le délai de coupure est appliqué côté serveur",
+      "reqs": "40",
+      "status": "ok",
+      "info": "fenêtre de coupure non reproductible ici (public creneau_pris, admin 409) — le délai est renvoyé au client : 14400 min",
+      "ms": 26148
+    },
+    {
+      "g": "3",
+      "feature": "Aucun créneau hors horaires, et granularité de 10 minutes",
+      "reqs": "41, 42",
+      "status": "ok",
+      "info": "530 créneaux alignés sur 10 min, tous dans les horaires (contrôle sur 14 jours)",
+      "ms": 23342
+    },
+    {
+      "g": "4",
+      "feature": "Entrer en file : position, créneau visé, contact",
+      "reqs": "43, 44",
+      "status": "ok",
+      "info": "position 9/9 · estimé 28/09 à 17:30",
+      "ms": 5359
+    },
+    {
+      "g": "4",
+      "feature": "La file est visible du staff et se convertit en réservation",
+      "reqs": "45, 46, 98",
+      "status": "ok",
+      "info": "9 demande(s) en file · offre créée puis réclamée (RDV #656)",
+      "ms": 48711
+    },
+    {
+      "g": "4",
+      "feature": "Refuser une offre la passe à la personne suivante (personne ne garde un créneau froid)",
+      "reqs": "47",
+      "status": "ok",
+      "info": "refus accepté (200) puis offre suivante créée (200)",
+      "ms": 81822
+    },
+    {
+      "g": "4",
+      "feature": "Annuler sa place dans la file",
+      "reqs": "48",
+      "status": "ok",
+      "info": "sortie de file confirmée (statut 200)",
+      "ms": 4123
+    },
+    {
+      "g": "4",
+      "feature": "File d’attente physique (walk-in) : on entre, on est appelé, la file se vide",
+      "reqs": "49",
+      "status": "ok",
+      "info": "passage #1 créé, appelé puis fermé · file publique {\"enabled\":true,\"waiting\":1,\"freeNow\":7,",
+      "ms": 6435
+    },
+    {
+      "g": "5",
+      "feature": "Vue « aujourd’hui » : RDV, CA, retards, prochain client",
+      "reqs": "50, 51",
+      "status": "ok",
+      "info": "11 RDV · CA 0 € · retards 0",
+      "ms": 4143
+    },
+    {
+      "g": "5",
+      "feature": "Aucun chevauchement dans l’agenda d’un barbier (preuve sur 14 jours)",
+      "reqs": "52, 98",
+      "status": "ok",
+      "info": "88 RDV sur 35 jours, 3 barbier(s), 0 chevauchement",
+      "ms": 82761
+    },
+    {
+      "g": "5",
+      "feature": "Bloquer une plage (formation, pause) retire les créneaux correspondants",
+      "reqs": "53, 54",
+      "status": "ok",
+      "info": "plage 17:00–18:30 retirée à staff ciblé (4 créneaux) puis rendue (4 revenus)",
+      "ms": 50319
+    },
+    {
+      "g": "5",
+      "feature": "Un barbier ne voit que ce qu’il doit voir : réglages fermés, agenda ouvert",
+      "reqs": "55, 94",
+      "status": "ok",
+      "info": "staff: agenda 200 · réglages 403 · création de prestation 403 · anonyme 401",
+      "ms": 5940
+    },
+    {
+      "g": "5",
+      "feature": "Création manuelle côté back-office, et refus du conflit",
+      "reqs": "56, 57",
+      "status": "ok",
+      "info": "créé #660 puis second essai sur le même créneau refusé (409 creneau_pris)",
+      "ms": 55878
+    },
+    {
+      "g": "5",
+      "feature": "Transitions d’état : confirmé → terminé, no-show tracé, idempotent",
+      "reqs": "58, 59",
+      "status": "ok",
+      "info": "complete 200 · no-show 200 · répétition 200 (jamais 500)",
+      "ms": 42161
+    },
+    {
+      "g": "6",
+      "feature": "Recherche client par téléphone normalisé (06/44/+33 confondus)",
+      "reqs": "60, 61",
+      "status": "ok",
+      "info": "trouvé avec « +33628523662 » → client #113 (Feat LB9M9J)",
+      "ms": 416
+    },
+    {
+      "g": "6",
+      "feature": "Fiche client : historique, valeur, préférences, notes modifiables",
+      "reqs": "62, 63, 64",
+      "status": "ok",
+      "info": "1 venue(s) · 0 points · segment nouveau · note et tags persistés",
+      "ms": 3321
+    },
+    {
+      "g": "6",
+      "feature": "Segments calculés (aucune étiquette décorative) et recherche globale",
+      "reqs": "65, 66",
+      "status": "ok",
+      "info": "segment no-show: 0 client(s) sur 60 · recherche globale 1325 o",
+      "ms": 1270
+    },
+    {
+      "g": "6",
+      "feature": "Espace client sans mot de passe : code à 6 chiffres, session, historique",
+      "reqs": "67, 68",
+      "status": "ok",
+      "info": "session créée · 0 RDV · 0 points · code faux → 401",
+      "ms": 6796
+    },
+    {
+      "g": "6",
+      "feature": "Rebooker en un clic depuis l’espace client",
+      "reqs": "69, 98",
+      "status": "ok",
+      "info": "547 créneaux proposés (habitude 28 j) · premier créneau réservé puis annulé",
+      "ms": 38965
+    },
+    {
+      "g": "6",
+      "feature": "RGPD : export lisible par un humain puis suppression qui anonymise",
+      "reqs": "70, 71, 93",
+      "status": "ok",
+      "info": "export 6756 o (0 RDV) · suppression appliquée",
+      "ms": 11648
+    },
+    {
+      "g": "7",
+      "feature": "Les points tombent à la fin du RDV et se convertissent en récompense",
+      "reqs": "72, 73",
+      "status": "ok",
+      "info": "complété (status 200) · points 25",
+      "ms": 49417
+    },
+    {
+      "g": "7",
+      "feature": "Carte cadeau : achat → code → vérification → utilisation au paiement",
+      "reqs": "74, 75",
+      "status": "ok",
+      "info": "code ZY-J… · 30 € crédités · code faux → 404 · solde après usage −0 €",
+      "ms": 41341
+    },
+    {
+      "g": "7",
+      "feature": "Parrainage : le lien est traçable et la récompense passe par une action à valider",
+      "reqs": "76",
+      "status": "ok",
+      "info": "0 relation(s) de parrainage · 0 action(s) à traiter dans « Aujourd'hui »",
+      "ms": 6938
+    },
+    {
+      "g": "8",
+      "feature": "Zero chaos : la confirmation part toute seule, avec un idempotence-key",
+      "reqs": "77, 78, 98",
+      "status": "ok",
+      "info": "7 message(s) auto (cancelled, cancelled, rescheduled, rescheduled) · 0 doublon · 0 en file",
+      "ms": 553
+    },
+    {
+      "g": "8",
+      "feature": "Rappel J-1 programmé à l’avance, pas envoyé à l’aveugle",
+      "reqs": "79",
+      "status": "skip",
+      "info": "aucun rappel en base : aucun rendez-vous à plus de 3 h de maintenant",
+      "ms": 547
+    },
+    {
+      "g": "8",
+      "feature": "Editer un modèle change le prochain message (le texte n’est pas codé en dur)",
+      "reqs": "80",
+      "status": "ok",
+      "info": "modèle booking_confirmed modifié → message réellement envoyé avec la marque « — modifié par le vérificateur LB9M9J », puis restauré",
+      "ms": 42483
+    },
+    {
+      "g": "8",
+      "feature": "Le cron fait le travail, deux fois de suite, sans rien répéter",
+      "reqs": "81, 82, 98",
+      "status": "ok",
+      "info": "passage 1: \"slug\":\"zyass\",\"dispatched\":2,\"expiredOffers\":0,\"noShows\":0,\"autoComplete\":0,\"rebook\":0,\"… · passage 2 idempotent · 0 nouveau(x) message(s), 0 doublon · sans secret 403",
+      "ms": 40170
+    },
+    {
+      "g": "8",
+      "feature": "Une automatisation peut être coupée puis rouverte par le salon",
+      "reqs": "83",
+      "status": "ok",
+      "info": "12 automatisations · auto_review coupée puis rouverte (état vérifié en relisant l'API)",
+      "ms": 2241
+    },
+    {
+      "g": "8",
+      "feature": "Se désabonner coupe le marketing, pas les rappels de RDV",
+      "reqs": "84, 93",
+      "status": "ok",
+      "info": "désabonnement appelé 2 fois (200, 200) · aucun rappel de RDV touché",
+      "ms": 1796
+    },
+    {
+      "g": "8",
+      "feature": "Demande d’avis déclenchée à la fin du RDV, pas avant",
+      "reqs": "85, 97",
+      "status": "ok",
+      "info": "avant: déjà demandé · après complétion (200): demande envoyée",
+      "ms": 42853
+    },
+    {
+      "g": "9",
+      "feature": "Avis positif → on propose Google ; avis négatif → on s’explique en privé",
+      "reqs": "86, 87, 97",
+      "status": "ok",
+      "info": "5★ 201 (Google via config) · 1★ 201 sans lien Google, formulaire privé",
+      "ms": 44422
+    },
+    {
+      "g": "9",
+      "feature": "Seuls les avis vérifiables sont publics, et le compte affiché est le vrai",
+      "reqs": "88, 97",
+      "status": "ok",
+      "info": "1 avis public(s) (tous canaux réels) · 60 privés conservés côté salon · note affichée —",
+      "ms": 24529
+    },
+    {
+      "g": "9",
+      "feature": "Répondre publiquement à un avis",
+      "reqs": "89",
+      "status": "ok",
+      "info": "réponse ajoutée à l'avis #121 et relue depuis l'API",
+      "ms": 3439
+    },
+    {
+      "g": "10",
+      "feature": "Les 14 rapports répondent avec des données exploitables",
+      "reqs": "90, 91",
+      "status": "ok",
+      "info": "14/14 rapports · 30.4 ko cumulés",
+      "ms": 67922
+    },
+    {
+      "g": "10",
+      "feature": "Les chiffres se recoupent : CA, no-show et taux de remplissage sont calculés, pas écrits",
+      "reqs": "92, 95",
+      "status": "ok",
+      "info": "no-show 6.3 % · remplissage max 69 % (33 journées-barbiers) · 108 RDV à venir",
+      "ms": 108599
+    },
+    {
+      "g": "10",
+      "feature": "Les sources d’acquisition sont réellement attribuées",
+      "reqs": "93, 15",
+      "status": "ok",
+      "info": "12 source(s) tracée(s) · campagne « verif-LB9M9J » présente: true",
+      "ms": 1387
+    },
+    {
+      "g": "10",
+      "feature": "Prévisions et recommandations : calculées sur l’historique, jamais publiées comme vérité",
+      "reqs": "94, 95",
+      "status": "ok",
+      "info": "forecast 1884 o · 4 recommandation(s), ton conditionnel vérifié",
+      "ms": 5540
+    },
+    {
+      "g": "11",
+      "feature": "En-têtes de sécurité sur le site et l’API",
+      "reqs": "96, 97",
+      "status": "ok",
+      "info": "content-security-policy ✓ · x-content-type-options ✓ · referrer-policy ✓ · x-frame-options ✓",
+      "ms": 14204
+    },
+    {
+      "g": "11",
+      "feature": "Cookies de session : HttpOnly, SameSite, Secure en prod",
+      "reqs": "98, 97",
+      "status": "ok",
+      "info": "Path=/; HttpOnly; SameSite=Lax; Max-Age=7776000",
+      "ms": 910
+    },
+    {
+      "g": "11",
+      "feature": "Anti-énumération : un code erroné ne dit pas si le compte existe",
+      "reqs": "99",
+      "status": "ok",
+      "info": "demande 404, vérification 404 (code_inconnu)",
+      "ms": 833
+    },
+    {
+      "g": "11",
+      "feature": "Anti force brute : le plafond tombe après 6 codes faux",
+      "reqs": "100",
+      "status": "ok",
+      "info": "429 déclenché au bout de ≤7 tentatives",
+      "ms": 2644
+    },
+    {
+      "g": "11",
+      "feature": "IDOR : un client ne lit ni n’annule le RDV d’un autre",
+      "reqs": "101",
+      "status": "ok",
+      "info": "token falsifié 403 · id seul 422 · légitime annulé ✓",
+      "ms": 34515
+    },
+    {
+      "g": "11",
+      "feature": "Traversée de chemin : le serveur statique ne sort pas de dist/",
+      "reqs": "102",
+      "status": "ok",
+      "info": "4 sondes, aucune fuite",
+      "ms": 18
+    },
+    {
+      "g": "11",
+      "feature": "Chaque action sensible laisse une trace (observations, audit)",
+      "reqs": "103",
+      "status": "ok",
+      "info": "observabilité 216 o · 25 événements · réglages relus",
+      "ms": 3714
+    },
+    {
+      "g": "12",
+      "feature": "Viewport mobile sans zoom bloqué, langue déclarée, CSS unique",
+      "reqs": "104, 51, 105",
+      "status": "ok",
+      "info": "viewport « width=device-width, initial-scale=1, viewport-fit=cover » · 1 fichier CSS (style-DeUYSET8.css)",
+      "ms": 6
+    },
+    {
+      "g": "12",
+      "feature": "Le poids du premier chargement tient dans un budget",
+      "reqs": "105, 106",
+      "status": "ok",
+      "info": "HTML 18 ko · JS 189 ko · CSS 20 ko",
+      "ms": 12
+    },
+    {
+      "g": "12",
+      "feature": "Les règles d’adaptivité sont bien dans le CSS servi (pas seulement dans le source)",
+      "reqs": "104, 105",
+      "status": "ok",
+      "info": "8/8 règles présentes · 20 ko · 2 !important",
+      "ms": 3
+    },
+    {
+      "g": "12",
+      "feature": "SEO technique : robots, sitemap joignable, chaque URL du sitemap répond",
+      "reqs": "106",
+      "status": "ok",
+      "info": "sitemap 27 URLs · 12 testées (100 %) · JSON-LD par page via /seo/:slug",
+      "ms": 722
+    },
+    {
+      "g": "12",
+      "feature": "Open Graph par page (les partages Instagram font le travail)",
+      "reqs": "107",
+      "status": "ok",
+      "info": "og:{type, site_name, title, description, image} · image /brand/hero.jpg → 200",
+      "ms": 7
+    },
+    {
+      "g": "13",
+      "feature": "Deux salons, deux mondes : les données ne se mélangent pas",
+      "reqs": "108, 109",
+      "status": "ok",
+      "info": "2 emplacements · « Salon Vérif LB9M9J » isolé (0 client, 0 RDV, agenda fermé) · config séparée",
+      "ms": 3185
+    },
+    {
+      "g": "13",
+      "feature": "Les deux moteurs de base sont réels : SQLite en local, Postgres en production",
+      "reqs": "109",
+      "status": "ok",
+      "info": "dialect=postgres · 347 RDV · fuseau —",
+      "ms": 144
+    },
+    {
+      "g": "13",
+      "feature": "Le tick serveurless est externalisé (cron Vercel), pas une setInterval cachée",
+      "reqs": "109",
+      "status": "ok",
+      "info": "healthz — · observabilité: \"cron\",\"n\":26,\"avg_ms\":23144,\"max_ms\":54991",
+      "ms": 1381
+    }
+  ]
+}

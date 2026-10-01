@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "paths": { "@shared/*": ["../shared/*"] }
+  },
+  "include": ["../server", "../shared", "../tests"],
+  // Les tests qui importent le graphe client (SSR via scripts/ssr-lib) entraînent client/src/** dans
+  // CE programme, or il est volontairement sans lib DOM : ces fichiers sont typés par le tsconfig
+  // racine (DOM inclus) et exclus d'ici — sinon « window » devient une erreur fictive.
+  "exclude": ["../client", "../tests/render.test.ts", "../tests/responsive.test.ts", "../tests/deep.test.ts"]
+}

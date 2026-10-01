@@ -1,0 +1,39 @@
+# Dépendances et artefacts régénérables
+node_modules/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+.scratch/
+.cache/
+.npm/
+*.log
+
+# Base locale (les données du salon ne vont jamais dans le dépôt)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/tmp-*/
+
+# Secrets : jamais commités. `.env.example` est le seul fichier d'environnement versionné.
+.env
+.env.*
+.env*.local
+!.env.example
+# PDF généré avec `npm run guide` : il injecte les secrets locaux, donc non committable.
+docs/GUIDE-MISE-EN-LIGNE.pdf
+.env.supabase
+
+docs/.guide-build.html
+
+# Preuves navigateur et variantes de génération, pas des sources de production
+.shots/
+Unselected files/
+
+# Logs fournis par le propriétaire : privés, jamais servis ni versionnés
+uploads/
+
+# Entrée éphémère du test navigateur de production
+/api/.navigation-test.mjs
+/api/.mobile-test.mjs

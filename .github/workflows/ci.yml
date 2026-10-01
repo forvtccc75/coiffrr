@@ -1,0 +1,82 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Types (client + serveur ; le serveur est compile sans DOM)
+        run: npm run typecheck
+      - name: Tests unitaires et d integration (123 tests)
+        run: npm test
+      - name: Garanties produit bout-en-bout (22 invariants)
+        run: npm run smoke
+      - name: Build client + pre-rendu SEO
+        run: npm run build:strict
+      - name: Aucun secret reel dans le depot
+        run: npm run audit:secrets
+      - name: HTTP smoke sur l instance locale (API + assets + prerender)
+        run: bash scripts/smoke.sh --local
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dist
+          path: dist
+          retention-days: 7
+
+  postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      pg:
+        image: postgres:16
+        env: { POSTGRES_USER: ci_test, POSTGRES_PASSWORD: ci_test_only, POSTGRES_DB: zyass_test }
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U ci_test" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://ci_test:ci_test_only@127.0.0.1:5432/zyass_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - name: Meme schema, autre moteur
+        run: npm run migrate
+      - name: Garanties produit sur Postgres
+        run: npm run smoke
+      - name: Tests sur Postgres
+        run: npm test
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - name: Playwright (chromium + mobile emulate)
+        run: |
+          npx playwright install --with-deps chromium
+          npm run e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report

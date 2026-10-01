@@ -1,0 +1,48 @@
+name: Tick d'automatisation (relais du cron Vercel)
+
+# Ordonnanceur facultatif : aucun cron Vercel n’est déclaré. Les schedules GitHub peuvent être retardés.
+# Vérifier les quotas/frais Actions du dépôt ; aucune garantie de ponctualité à la minute.
+# Garder un seul ordonnanceur actif : ce relais OU un service HTTP externe.
+# Settings > Secrets and variables > Actions :
+#   variable ENABLE_CRON_RELAY = true
+#   variable APP_URL = https://votre-domaine.fr (sans slash final)
+#   secret CRON_SECRET = même secret que dans Vercel
+on:
+  schedule:
+    # Horaires du salon en UTC : 9 h 30 - 20 h Paris = 7 h 40 - 18 h UTC en été, 8 h 40 - 19 h en
+    # hiver. On large la fenêtre (7-20) et le tick s'auto-liminte hors horaires : un passage de trop
+    # ne coûte qu'un aller-retour, un passage manqué coûte un fauteuil vide.
+    - cron: '*/10 7-20 * * 1-6'
+    - cron: '40 6 * * 1-6'
+    - cron: '50 20 * * 1-6'
+    - cron: '0 21 * * 0'
+  workflow_dispatch: {}
+
+permissions: {}
+concurrency:
+  group: zyass-cron-tick
+  cancel-in-progress: false
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    if: vars.ENABLE_CRON_RELAY == 'true'
+    timeout-minutes: 4
+    steps:
+      - name: Appeler /api/internal/cron
+        env:
+          APP_URL: ${{ vars.APP_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "${APP_URL:-}" ] || [ -z "${CRON_SECRET:-}" ]; then
+            echo "APP_URL ou CRON_SECRET absent des réglages Actions" >&2
+            exit 1
+          fi
+          # -f : tout HTTP 4xx/5xx provoque un échec. Ne jamais activer set -x ici.
+          for i in 1 2 3; do
+            if curl -fsS --max-time 60 -H "Authorization: Bearer $CRON_SECRET" "${APP_URL%/}/api/internal/cron?source=actions"; then exit 0; fi
+            echo "tentative $i échouée"
+            if [ "$i" -lt 3 ]; then sleep 10; fi
+          done
+          echo "le tick a échoué 3 fois" >&2
+          exit 1

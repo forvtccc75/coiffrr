@@ -1,0 +1,18 @@
+{
+  "importedAt": "2026-09-29",
+  "listing": "https://www.google.com/maps?cid=14672622159112713981&hl=fr",
+  "authorization": "L’utilisateur a confirmé « Toutes les photos autorisées » : droits de republication et autorisations des personnes reconnaissables.",
+  "scope": "Une seule photo récupérable dans l’affichage public limité de Google Maps. Ni intérieur, ni réalisation inventée.",
+  "photos": [
+    {
+      "file": "client/public/gallery/zyass-devanture-google.webp",
+      "source": "https://lh3.googleusercontent.com/grass-cs/ACvplmO5tMF7UZ3vy3sAE-aG3CkDi6_RMvdNJ8HuKU0epO5LYfqGGVpKiw1UcZVBbunWEm8bAkO0EuYkxRO9lfB7MkAKci6VABHL33LTRuM2-WnvNruHb0e7SgbB8lZXar-GhgDs9xJ6=w1600-h1600-k-no",
+      "caption": "Devanture Z.yass Barber Shop, boulevard Roy",
+      "author": "Auteur non exposé dans l’affichage public consulté ; ne pas attribuer cette prise de vue à un auteur supposé.",
+      "width": 1600,
+      "height": 1108,
+      "sha256": "303ab7bc73cdee19bf41940f25ff85660d75ee27950785bdbc03c37a2d2cf6e8",
+      "transform": "JPEG original converti en WebP, sans recadrage ni retouche du contenu, sans génération IA."
+    }
+  ]
+}

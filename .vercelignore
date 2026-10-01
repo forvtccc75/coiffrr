@@ -1,0 +1,19 @@
+# Secrets locaux et documents privés : ne jamais les envoyer dans le bundle Vercel.
+.env
+.env.*
+!.env.example
+docs/GUIDE-MISE-EN-LIGNE.pdf
+docs/.guide-build.html
+data/
+.shots/
+.scratch/
+test-results/
+playwright-report/
+CORRECTIF-VERCEL.zip
+
+# Logs fournis par le propriétaire : privés, jamais servis ni versionnés
+uploads/
+
+# Entrée éphémère du test navigateur de production
+/api/.navigation-test.mjs
+/api/.mobile-test.mjs

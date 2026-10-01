@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-28",
+  "mode": "paiement_sur_place",
+  "unit": {
+    "passed": 136,
+    "failed": 0
+  },
+  "smoke": {
+    "passed": 22,
+    "failed": 0
+  },
+  "e2e_targeted": {
+    "passed": 18,
+    "failed": 0,
+    "projects": [
+      "chrome",
+      "phone-se"
+    ],
+    "suites": [
+      "booking",
+      "admin",
+      "seo-onsite"
+    ],
+    "payments_provider": "off"
+  },
+  "build": {
+    "pages": 33,
+    "strict": true,
+    "initial_brotli_kb": 101.0
+  },
+  "sql_schema_changed": false,
+  "production_write_performed": false,
+  "limitations": [
+    "pas de deploiement Vercel reel",
+    "pas de reception Meta/Twilio/Resend reelle",
+    "pas de resultat SEO/IA garanti",
+    "WebKit non rejoue dans cette passe"
+  ]
+}
